@@ -24,3 +24,5 @@
 # Задание 2
 
 ![Диаграмма контейнеров](./future-container-diagram.png)
+
+![Диаграмма компонентов](./future-component-diagram.png)
