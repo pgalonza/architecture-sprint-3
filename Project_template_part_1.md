@@ -20,3 +20,7 @@
 
 
 ![Контекстная диаграмма текущего решения](./current-context-diagram.png)
+
+# Задание 2
+
+![Диаграмма контейнеров](./future-container-diagram.png)
