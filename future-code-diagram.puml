@@ -1,0 +1,28 @@
+@startuml
+title Control Service
+
+top to bottom direction
+
+class Device {
+    Communication: communication
+    void: setCommunication()
+    int: setTemperature()
+    int: lightOff()
+    int: lightOn()
+    int: closeGate()
+    int: openGate()
+    int: getStream()
+}
+
+class NewDevice extends Device
+
+class ApiCommunication extends Communication
+
+class TaskCommunication extends Communication
+
+class HookCommunication extends Communication
+
+class Communication {
+    int: sendCommand()
+}
+@enduml
