@@ -13,6 +13,8 @@ Container_Boundary(device_service, "Device Service"){
     Component(logic_ds, "Logic")
 }
 Rel(api_controller_ds, prometheus_exp_ds, "Service metics")
+Rel(prometheus_exp_ds, logic_ds, "Logic metrics")
+Rel(prometheus_exp_ds, producer_ds, "Producer metrics")
 Rel(api_controller_ds, logic_ds, "Processing")
 Rel(logic_ds, repository_ds, "Data")
 Rel(logic_ds, producer_ds, "Send message")
@@ -25,6 +27,8 @@ Container_Boundary(user_service, "User Service"){
     Component(logic_us, "Logic")
 }
 Rel(api_controller_us, prometheus_exp_us, "Service metics")
+Rel(prometheus_exp_us, logic_us, "Logic metrics")
+Rel(prometheus_exp_us, producer_us, "Producer metrics")
 Rel(api_controller_us, logic_us, "Processing")
 Rel(logic_us, repository_us, "Data")
 Rel(logic_us, producer_us, "Send message")
@@ -37,6 +41,8 @@ Container_Boundary('auth_service', "Authorization service"){
     Component(logic_as, "Logic")
 }
 Rel(api_controller_as, prometheus_exp_as, "Service metics")
+Rel(prometheus_exp_as, logic_as, "Logic metrics")
+Rel(prometheus_exp_as, producer_as, "Producer metrics")
 Rel(api_controller_as, logic_as, "Processing")
 Rel(logic_as, repository_as, "Data")
 Rel(logic_as, producer_as, "Send message")
@@ -49,6 +55,8 @@ Container_Boundary('consumer_connector', "Consumer connector"){
     Component(logic_cc, "Logic")
 }
 Rel(api_controller_cc, prometheus_exp_cc, "Service metics")
+Rel(prometheus_exp_cc, logic_cc, "Logic metrics")
+Rel(prometheus_exp_cc, consumer_cc, "Producer metrics")
 Rel(api_controller_cc, logic_cc, "Processing")
 Rel(logic_cc, repository_cc, "Write data")
 Rel(consumer_cc, logic_cc, "Get message")
@@ -60,6 +68,8 @@ Container_Boundary('producer_connector', "Producer connector"){
     Component(logic_pc, "Logic")
 }
 Rel(api_controller_pc, prometheus_exp_pc, "Service metics")
+Rel(prometheus_exp_pc, logic_pc, "Logic metrics")
+Rel(prometheus_exp_pc, producer_pc, "Producer metrics")
 Rel(api_controller_pc, logic_pc, "Processing")
 Rel(logic_pc, producer_pc, "Write message")
 
@@ -71,6 +81,8 @@ Container_Boundary('control_service', "Control service"){
     Component(logic_cs, "Logic")
 }
 Rel(api_controller_cs, prometheus_exp_cs, "Service metics")
+Rel(prometheus_exp_cs, logic_cs, "Logic metrics")
+Rel(prometheus_exp_cs, producer_cs, "Producer metrics")
 Rel(api_controller_cs, logic_cs, "Processing")
 Rel(logic_cs, repository_cs, "Data")
 Rel(logic_cs, producer_cs, "Send message")
@@ -83,6 +95,8 @@ Container_Boundary('telemetry_service', "Telemetry service"){
     Component(logic_ts, "Logic")
 }
 Rel(api_controller_ts, prometheus_exp_ts, "Service metics")
+Rel(prometheus_exp_ts, logic_ts, "Logic metrics")
+Rel(prometheus_exp_ts, producer_ts, "Producer metrics")
 Rel(api_controller_ts, logic_ts, "Processing")
 Rel(logic_ts, repository_ts, "Data")
 Rel(logic_ts, producer_ts, "Send message")
@@ -95,6 +109,7 @@ Container_Boundary('notification_service', "Notification service"){
     Component(adapter_ns, "Adapter")
 }
 Rel(api_controller_ns, prometheus_exp_ns, "Service metics")
+Rel(prometheus_exp_ns, logic_ns, "Logic metrics")
 Rel(consumer_ns, logic_ns, "Message")
 Rel(logic_ns, adapter_ns, "Notification")
 

@@ -41,6 +41,8 @@ Rel(webui_service, api_gateway, "API-requests")
 
 Container(devices, "Devices")
 Rel(devices, haproxy, "Registration,send telemetry, get tasks")
+Container(modules, "Modules")
+Rel(devices, modules, "Telemetry and Commands")
 
 Rel(api_gateway, application, "API-requests")
 Rel(api_gateway, device_service, "API-requests")

@@ -7,8 +7,10 @@ top to bottom direction
 
 Person_Ext(user, "User")
 System(warmhouse, "Warm House")
-System(sensors, 'Sensors')
+System(devices, 'Devices')
+System(modules, 'Modules')
 Rel(user, warmhouse, "Check temperature and manage the heating")
-Rel(warmhouse, sensors, "Get temperature, set heating mode")
-Rel(sensors, warmhouse, "Session")
+Rel(warmhouse, devices, "Get temperature, set heating mode")
+Rel(devices, warmhouse, "Session")
+Rel(devices, modules, "Connection")
 @enduml
