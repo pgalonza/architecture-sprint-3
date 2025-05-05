@@ -1,0 +1,88 @@
+@startchen
+title WarmHouse ER Diagram
+
+top to bottom direction
+
+entity User {
+    ID
+    Login
+    Fullname
+    Access
+}
+
+entity House {
+    ID
+    Name
+    OwnerID
+}
+
+entity Device {
+    ID
+    Name
+    DeviceTypeID
+    HouseID
+    Firmware
+    Rev
+    Brand
+}
+
+entity DeviceType {
+    ID
+    Name
+}
+
+entity Modules {
+    ID
+    Name
+}
+
+entity Telemetry {
+    Type
+    DeviceID
+    HouseID
+}
+
+entity Notification {
+    Type
+    DeviceID
+    HouseID
+}
+
+relationship Access {
+
+}
+
+relationship Mounted {
+
+}
+
+relationship Functionality {
+
+}
+
+relationship Connection {
+
+}
+
+relationship Send {
+
+}
+
+
+User -1- Access
+Access -N- House
+
+House -1- Mounted
+Mounted -N- Device
+
+Device -M- Functionality
+Functionality -1- DeviceType
+
+
+
+DeviceType -1- Connection
+Connection -N- Modules
+DeviceType -M- Send
+Send -N- Notification
+Send -N- Telemetry
+@endchen

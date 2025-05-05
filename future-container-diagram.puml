@@ -1,0 +1,75 @@
+@startuml
+title WarmHouse Container Diagram
+
+top to bottom direction
+
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+Person_Ext(user, "User")
+System_Boundary(s1, "System WarmHouse") {
+    Container(api_gateway, "API Gateway")
+    ContainerQueue(kafka, "Kafka")
+    Container(haproxy, "haproxy")
+
+    Container(application, "Old Java Application")
+    Container('device_service', "Device Service")
+    Container('user_service', "User Service")
+    Container('auth_service', "Authorization service")
+    Container('consumer_connector', "Consumer connector")
+    Container('producer_connector', "Producer connector")
+    Container('control_service', "Control service")
+    Container('telemetry_service', "Telemetry service")
+    Container('webui_service', "WEB-UI service")
+    Container('notification_service', "Notification service")
+
+    ContainerDb(ds_db, "PostgreSQL")
+    ContainerDb('as_db', "PostgreSQL")
+    ContainerDb('ts_db', "OpenSearch")
+    ContainerDb('us_db', "PostgreSQL")
+    ContainerDb('cs_db', "PostgreSQL")
+    ContainerDb(pastgresql, "PostgreSQL")
+
+
+    Container('prometheus', "Prometheus")
+    Container(istio, "Istio")
+    Container(all_services, "all services")
+}
+Rel(user, haproxy, "Check temperature and manage the heating")
+Rel(haproxy, webui_service, "Check temperature and manage the heating")
+Rel(haproxy, api_gateway, "API request")
+Rel(webui_service, api_gateway, "API-requests")
+
+Container(devices, "Devices")
+Rel(devices, haproxy, "Registration,send telemetry, get tasks")
+Container(modules, "Modules")
+Rel(devices, modules, "Telemetry and Commands")
+
+Rel(api_gateway, application, "API-requests")
+Rel(api_gateway, device_service, "API-requests")
+Rel(api_gateway, auth_service, "API-requests")
+Rel(api_gateway, producer_connector, "Telemetry data")
+Rel(api_gateway, telemetry_service, "API-requests")
+Rel(api_gateway, user_service, "API-requests")
+Rel(api_gateway, control_service, "API-requests")
+
+
+Rel(consumer_connector, kafka, "Consumer")
+Rel(notification_service, kafka, "Consumer")
+Rel(producer_connector, kafka, "Producer")
+Rel(device_service, kafka, "Producer")
+Rel(user_service, kafka, "Producer")
+Rel(auth_service, kafka, "Producer")
+Rel(telemetry_service, kafka, "Producer")
+Rel(control_service, kafka, "Producer")
+
+Rel(application, pastgresql, "Read/Write")
+Rel(device_service, ds_db, "Read/Write")
+Rel(auth_service, as_db, "Read/Write")
+Rel(user_service, us_db, "Read/Write")
+Rel(control_service, cs_db, "Read/Write")
+Rel(consumer_connector, ts_db, "Write")
+Rel(telemetry_service, ts_db, "Read")
+
+Rel(prometheus, all_services, "Get Metrics")
+Rel(all_services, istio, "Register services, get info")
+@enduml

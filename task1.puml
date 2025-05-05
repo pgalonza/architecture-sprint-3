@@ -1,0 +1,16 @@
+@startuml
+title WarmHouse Context Diagram
+
+top to bottom direction
+
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+
+Person_Ext(user, "User")
+System(warmhouse, "Warm House")
+System(devices, 'Devices')
+System(modules, 'Modules')
+Rel(user, warmhouse, "Check temperature and manage the heating")
+Rel(warmhouse, devices, "Get temperature, set heating mode")
+Rel(devices, warmhouse, "Session")
+Rel(devices, modules, "Connection")
+@enduml
